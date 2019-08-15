@@ -108,20 +108,33 @@ new MyPromise(function (resolve, reject) {
 })
 
 # 节流2
-function conduct(fn, delay, masExac) {
+   
+    function conduct(fn, delay, masExac) {
+
         var timer;
+        
         var lastTime = new Date();
+        
         return function (arg) {
+        
             var now = new Date();
+            
             clearTimeout(timer)
+            
             if (now - lastTime < masExac) {
+            
                 timer = setTimeout(() => {//只在最后事件停止出发的时候执行过
+                
                     fn(arg);
                     lastTime = now;
+                    
                 }, delay)
+                
             } else {          //间隔masExac时间执行一次
+            
                 fn(arg);
                 lastTime = now;
+                
             }
         }
     }
@@ -134,7 +147,9 @@ function conduct(fn, delay, masExac) {
         throttle('1')
     })
   # 防抖2
-   var isThrottle = true; //初始化无需走节流
+  
+    var isThrottle = true; //初始化无需走节流
+   
       var setTimer = null; //初始化定时器
 
       var throttle = function(fn, time) {
