@@ -106,3 +106,58 @@ new MyPromise(function (resolve, reject) {
 }).then(v => {
     console.log(v + "1");
 })
+
+# 节流2
+function conduct(fn, delay, masExac) {
+        var timer;
+        var lastTime = new Date();
+        return function (arg) {
+            var now = new Date();
+            clearTimeout(timer)
+            if (now - lastTime < masExac) {
+                timer = setTimeout(() => {//只在最后事件停止出发的时候执行过
+                    fn(arg);
+                    lastTime = now;
+                }, delay)
+            } else {          //间隔masExac时间执行一次
+                fn(arg);
+                lastTime = now;
+            }
+        }
+    }
+
+    function Fn(data){
+        console.log(data)
+    }
+    var throttle = conduct(Fn,1000,2000)
+    $(document).scroll(function () {
+        throttle('1')
+    })
+  # 防抖2
+   var isThrottle = true; //初始化无需走节流
+      var setTimer = null; //初始化定时器
+
+      var throttle = function(fn, time) {
+          clearInterval(setTimer)
+          var time = time || 300;
+          if (isThrottle) { //注意：在这里第一次滚动时候我们是需要立马执行函数的，真正的防抖是从第二次开始
+              fn();
+              isThrottle = false;
+              return false;
+              /*细节：这里如果你不return false阻断代码往下执行，那么在第一次时候实际还会走下面的else，也就是触发了两次,（因为滚轮触发的事件频率很高，第一次节流（else中）的事件会紧接着初始化第一次未节流事件去执行了）*/
+          } else {
+              console.log('高频触发滚动事件中')
+              setTimer = setTimeout(function() {
+                  fn();
+                  isThrottle = true;
+                  console.log('上一次打印是节流执行。。。')
+              }, time)
+          }
+      }
+
+      function conduct() {
+          console.log("1")
+      }
+      $(document).scroll(function() {
+          throttle(conduct, 1000);
+      })
