@@ -35,16 +35,17 @@
     window.addEventListener('resize', throttle(sayHi));
     
  #  手写简单promise
- const PENDING = 'pending';
-const RESOLVED = 'resolved';
-const REJECTED = 'rejected';
 
-function MyPromise(fn) {
-    const _this = this;
-    _this.state = PENDING;
-    _this.value = null;
-    _this.resolvedCallbacks = [];
-    _this.rejectedCallbacks = [];
+    const PENDING = 'pending';
+    const RESOLVED = 'resolved';
+    const REJECTED = 'rejected';
+
+    function MyPromise(fn) {
+        const _this = this;
+        _this.state = PENDING;
+        _this.value = null;
+        _this.resolvedCallbacks = [];
+        _this.rejectedCallbacks = [];
 
 
     // resolve函数
@@ -74,38 +75,38 @@ function MyPromise(fn) {
     }
 }
 
-// 为Promise原型链上添加then函数
-MyPromise.prototype.then = function (onFulfilled, onRejected) {
-    const _this = this;
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v;
-    onRejected = typeof onRejected === 'function' ? onRejected : r => {
-        throw r;
+    // 为Promise原型链上添加then函数
+    MyPromise.prototype.then = function (onFulfilled, onRejected) {
+        const _this = this;
+        onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v;
+        onRejected = typeof onRejected === 'function' ? onRejected : r => {
+            throw r;
+        }
+        if (_this.state === PENDING) {
+            _this.resolvedCallbacks.push(onFulfilled);
+            _this.rejectedCallbacks.push(onRejected);
+        }
+        if (_this.state === RESOLVED) {
+            onFulfilled(_this.value);
+        }
+        if (_this.state === REJECTED) {
+            onRejected(_this.value);
+        }
+        return _this;
     }
-    if (_this.state === PENDING) {
-        _this.resolvedCallbacks.push(onFulfilled);
-        _this.rejectedCallbacks.push(onRejected);
-    }
-    if (_this.state === RESOLVED) {
-        onFulfilled(_this.value);
-    }
-    if (_this.state === REJECTED) {
-        onRejected(_this.value);
-    }
-    return _this;
-}
 
 
 
-// 测试
-new MyPromise(function (resolve, reject) {
-    setTimeout(() => {
-        resolve('hello');
-    }, 2000);
-}).then(v => {
-    console.log(v);
-}).then(v => {
-    console.log(v + "1");
-})
+    // 测试
+    new MyPromise(function (resolve, reject) {
+        setTimeout(() => {
+            resolve('hello');
+        }, 2000);
+    }).then(v => {
+        console.log(v);
+    }).then(v => {
+        console.log(v + "1");
+    })
 
 # 节流2
    
