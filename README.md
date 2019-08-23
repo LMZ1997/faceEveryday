@@ -177,3 +177,7 @@
       $(document).scroll(function() {
           throttle(conduct, 1000);
       })
+# ES6的set用于数组去重
+    // 去重数组的重复对象
+    let arr = [1, 2, 3, 2, 1, 1]
+    [... new Set(arr)]	// [1, 2, 3]
