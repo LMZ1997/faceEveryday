@@ -190,3 +190,5 @@
   3.async/await 
 # TCP3次或4次握手
  4次握手出现于服务器需要多给客户端传输一次
+# setState的同步、异步情况
+    生命周期中的 setState 处于一个大的 transaction 中，此时的 isBatchingUpdate 为 true，执行 setState 只会让 dirtyComponents 数组 push 当前组件而不会进一步处理，此时 log 来看的话 state 还是没有变的。而如果在 transaction 之外，例如 setTimeout 里 setState，此时 isBatchingUpdate 为 false，会一路直接执行下来更改 state，所以此时 log 出来 state 是被立刻改变了的。因此 setState 不保证是同步，而不是说它一定是异步
