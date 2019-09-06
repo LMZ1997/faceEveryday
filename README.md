@@ -204,3 +204,5 @@
     会让 dirtyComponents 数组 push 当前组件而不会进一步处理，此时 log 来看的话 state 还是没有变的。而如果
     在 transaction 之外，例如 setTimeout 里 setState，此时 isBatchingUpdate 为 false，会一路直接执行下来
     更改 state，所以此时 log 出来 state 是被立刻改变了的。因此 setState 不保证是同步，而不是说它一定是异步
+# 重绘
+    由于节点的几何属性发生改变或者由于样式发生改变而不会影响布局的，称为重绘，例如outline, visibility, color、background-color等，重绘的代价是高昂的，因为浏览器必须验证DOM树上其他节点元素的可见性
