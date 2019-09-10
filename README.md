@@ -209,3 +209,4 @@
 # 重排（回流/feflow)
     元素几何属性改变后影响布局的，会触发重排。  重排必然带来重绘，但是重绘未必带来重排
 # "button type=\"reset\"></button>==="<button type="+'reset'+"></button>"
+# 点击按钮下载文件不能用点击事件触发ajax请求接口
