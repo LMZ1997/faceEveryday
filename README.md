@@ -209,3 +209,14 @@
 # 重排（回流/feflow)
     元素几何属性改变后影响布局的，会触发重排。  重排必然带来重绘，但是重绘未必带来重排
 # 模块化主要是用来抽离公共代码，隔离作用域，避免变量冲突等
+# 去掉antd的input数字输入框含有上下箭头的默认样式
+    //火狐浏览器
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+    //谷歌浏览器
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
