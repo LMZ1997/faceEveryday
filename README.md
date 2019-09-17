@@ -222,3 +222,30 @@
     }
 # ["A1", "A2", "B1", "B2", "C1", "C2", "D1", "D2", "A3", "B3", "C3", "D3"].sort()输出
     //["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3", "D1", "D2", "D3"]
+# let的某个特性
+    for(var i=0;i<10;i++){
+      setTimeout(function(){
+        console.log(i)                     // 9 9 9 9 9 9 9 9 9 9
+      },1000)
+    }
+    
+    for(let i=0;i<10;i++){
+      setTimeout(function(){
+        console.log(i)                     // 0 1 2 3 4 5 6 7 8 9
+      },1000)
+    }
+    
+    //setTimeout 函数的第三个参数，会作为回调函数的第一个参数传入
+    for(var i=0;i<10;i++){
+      setTimeout(function(i){
+         consolelog(i)                     // 0 1 2 3 4 5 6 7 8 9
+      },1000,i)
+    }
+  # 引用类型在比较运算符时候,隐式转换会调用本类型toString或valueOf方法
+        var a = {num:0};
+      a.valueOf = function(){
+        return ++a.num
+      }
+      if(a == 1 && a == 2 && a == 3){
+        console.log(1);
+      }
