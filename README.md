@@ -267,3 +267,17 @@
     why？ 重点在于a.x=a={n:2}  此语句执行顺序为从左向右，等号左边是给a指针指向的对象{n:1}添加一个key属性x,即a指向的对象变成
     了{n:1,x:undefined},此时看等号右边，是一个表达式，等待表达式执行完，a被重新赋值，也就是a指针指向变了，此时a=={n:2}。
     那{n:1,x:undefined}怎么办，被垃圾回收？NO,b指针还在用着它，so，明朗了吧
+#  冒泡排序使数组按照顺序排列
+    function bubbleSort(arr){
+      for(var i=0;i<arr.length;i++){//第一层循环可以取到i值，由i值确定二级循环的length;数组排序完成时不一定是全部循环完成，中途可能就完成
+        for(var j=0;j<arr.length-i-1;j++){  //每一次循环结束的最后一项都是最大值，所以下一次循环就不需要再比较最后一项
+          if(arr[j]>arr[j+1]){
+             let temp = arr[j+1];
+             arr[j+1] = arr[j];
+             arr[j]=temp;
+          }
+        }
+      }
+      console.log(arr);
+    }
+  
