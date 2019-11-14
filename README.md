@@ -280,4 +280,8 @@
       }
       console.log(arr);
     }
-  
+# ‘1'.toString()为社么可以调用？
+     其实这个语句运行过程中做了这样几件事
+     var s =new Object('1')  //为什么不是new String,因为Sybmbos类型的出现，对它调用new会报错，目前ES6规范不建议用new创建基本类型的包装类
+     s.toString()
+     s=null;     //执行完销毁这个实例
