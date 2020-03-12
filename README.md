@@ -299,3 +299,142 @@
       }
     }
     判断a==1的时候，执行了a.valueOf()==1,以此类推
+# 如果父元素的font-size也是采用em表示,那么子元素的font-size怎么计算；
+	如果父元素设置为2rem;真是font-size为32px;
+	子元素也设置为2rem;那么子元素的font-size为64px;
+# 下面通过代码阐述instanceof的内部机制,假设现在有 x instanceof y 一条语句
+	while(x.__proto__!==null) {
+	    if(x.__proto__===y.prototype) {
+		return true;
+	    }
+	    x.__proto__ = x.__proto__.proto__;
+	}
+	if(x.__proto__==null) {return false;}
+	
+	x会一直沿着隐式原型链__proto__向上查找直到x.__proto__.__proto__......===y.prototype为止，如果找到则返回true，也就是x为y的一个实例。否则返回false，x不是y的实例。
+#  react-router 和  react-router-dom 
+	不同之处就是后者比前者多出了 <Link> <BrowserRouter> 这样的 DOM 类组件。
+	因此我们只需引用 react-router-dom 这个包就行了
+#  刷新页面，js 请求一般会有哪些地方有缓存处理？
+	DNS缓存：短时间内多次访问某个网站，在限定时间内，不用多次访问DNS服务器。
+	CDN缓存：内容分发网络（人们可以在就近的代售点取火车票了，不用非得到火车站去排队）
+	浏览器缓存：浏览器在用户磁盘上，对最新请求过的文档进行了存储。
+	服务器缓存：将需要频繁访问的Web页面和对象保存在离用户更近的系统中，当再次访问这些对象的时候加快了速度。
+# 可以通过哪些方法优化css3 animation渲染
+	尽可能多的利用硬件能力，如使用3D变形来开启GPU加速：
+	尽可能少的使用box-shadows与gradients
+	在CSS动画中使用webkit-transform: translateX(3em)的方案代替使用left: 3em，因为left会额外触发layout与pain
+#  CSS Hack (用一些奇怪的手段达到兼容的方式！）
+	<!–-[if IE 7]>
+		<link rel="stylesheet" href="ie7.css" type="text/css" />
+	<![endif]–->
+# （值1，值2）等于啥
+	var d = a = 3, b = 4
+   	console.log(d)  //3
+	
+	var d = (a = 3, b = 4)
+    	console.log(d)  //4
+#  !!隐式转换
+	var x = !!"Hello" + (!"world", !!"from here!!");    console.log(x)   //2
+   	var x2 = 1 + (0,1);                                 console.log(x2)  //2
+   	var x3= true + (false,true);                        console.log(x3)  //2
+# a+++b运算过程
+    var a=1;
+    console.log( a+++3 ); //4      分为2部分运算，第一个首先a要先加上3，即1+3得出4，然后a++;即a此时==2；
+    console.log( a+++1 );//3       分为2部分运算，第一个首先a要先加上1，即2+1得出3，然后a++;即a此时==3；
+    console.log( a+++8 );//11      分为2部分运算，第一个首先a要先加上8，即3+8得出11，然后a++;即a此时==4；
+# 判断值的类型
+	typeof可以用来判断除null以外的其他原始类型的数据，typeof null == object;
+	instanceof 用来判断除function以外的其他复杂类型的数据， typeof 函数fn == function。
+# 函数传参中，参数为原始类型的，函数内不管如何改变参数的值，对函数外部的真实值不产生影响.若参数为复杂类型即对象时，函数内若更改参数，那么函数外部的值也将由影响
+# js的常用内置对象？（new + 对象）
+	Arguments 函数参数集合
+	Array 数组
+	Boolean 布尔对象
+	Date 日期时间
+	Error 异常对象
+	Function 函数构造器
+	Math 数学对象
+	Number 数值对象
+	Object 基础对象
+	RegExp 正则表达式对象
+	String 字符串对象
+# 谈谈垃圾回收机制的方式及内存管理
+      方式：
+      	    1.标记清除（首先标记所有变量，还有引用价值的变量去掉标记，剩下有标记的就全部被垃圾回收机制清除）
+	    2.引用计数（跟踪每个变量，该变量被引用一次计数就加1，该变量的值变成另一个计数就减1，当该变量计数为0时就被垃圾回收清除）
+# [1,2,3].map(parseInt)
+      设计到两方面知识
+      1.map函数的参数arguments
+      2.二进制转换规则
+      首先，map函数接收一个function,这个function默认传参为（item,index),也就是说parseInt(item,index);
+	parseInt(‘1’, 0); // radix为0时，使用默认的10进制，返回1。
+	parseInt(‘2’, 1); // radix值在2-36，无法解析，返回NaN。
+	parseInt(‘3’, 2); // 基数为2，2进制数表示的数中，最大值小于3，无法解析，返回NaN。
+# ES5和ES6如何取数组的最大值：
+	// ES5 的写法
+	Math.max.apply(null, [14, 3, 77, 30]);
+
+	// ES6 的写法
+	Math.max(...[14, 3, 77, 30]);
+# eval()的作用？
+	把字符串参数解析成JS代码并运行，并返回执行的结果；
+	
+	例如：
+	eval("2+3");//执行加运算，并返回运算值。
+	eval("var age=10");//声明一个age变量
+	
+	eval的作用域取决于调用它的this的作用域
+# DOM2级事件处理程序
+	DOM2支持同一dom元素注册多个同种事件，事件发生的顺序按照添加的顺序依次触发（IE是相反的）。
+	DOM2事件通过addEventListener和removeEventListener管理
+	oDom.addEventListener(eventName,handlers,boolean）中，boolean为true时，则节点事件在捕获时执行，反之则在冒泡时执行。
+# 手写ajax的get与post函数
+	 function goAjax(url,method,param,callBack){
+		 var xmlHttp=null;
+		 if(window.xmlHttpRequest)
+		 {
+		   xmlHttp=new XmlHttpRequest(); 
+		 }else{
+		  xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+		 }
+		 if(method=="get"||method=="GET")
+		 {
+		  if(param.length>0)
+		  {
+		   url=url+"?"+param;
+		  }
+		  xmlHttp.open("get",url,true);
+		  xmlHttp.setRequestHeader("If-Modified-Since","0");//不缓存
+		  xmlHttp.send(null);
+		 }else{
+		  xmlHttp.open("post",url,true);
+		  xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		  xmlHttp.setRequestHeader("If-Modified-Since","0");//不缓存
+		  xmlHttp.send(param);
+		 }
+		 xmlHttp.onreadystatechange=function(){
+		  if(xmlHttp.status==200&&xmlHttp.readyState==4)
+		  {
+		   callBack(xmlHttp. reponseText);
+		  }else{
+		   alert(xmlHttp.statusText);
+		  }
+		 }
+	}
+# JSONP的基本原理
+	动态添加一个<script>标签，而script标签的src属性是没有跨域的限制的。
+# session的原理
+	session是依赖Cookie实现的。session是服务器端对象
+	当用户第一次使用session时（表示第一次请求服务器），服务器会创建session，并创建一个Cookie，在Cookie中保存了session的id，发送给客户端。这样客户端就有了自己session的id了。但这个Cookie只在浏览器内存中存在，也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了sessionId
+# $.extend({},obj1,obj2,...)
+	var obj1={name:"Tom",age:21}
+	1:
+	var result=$.extend({},obj1,{name:"Jerry",sex:"Boy"})
+ 	result=={name:"Jerry",age:21,sex:"Boy"}
+	obj1={name:"Tom",age:21}
+	
+	2:
+	var result=$.extend(obj1,{name:"Jerry",sex:"Boy"})
+ 	result=={name:"Jerry",age:21,sex:"Boy"}
+	obj1=={name:"Jerry",age:21,sex:"Boy"}
