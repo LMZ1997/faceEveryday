@@ -438,3 +438,33 @@
 	var result=$.extend(obj1,{name:"Jerry",sex:"Boy"})
  	result=={name:"Jerry",age:21,sex:"Boy"}
 	obj1=={name:"Jerry",age:21,sex:"Boy"}
+# 快速排序
+	let quickSort = (arr)=>{
+
+	    //停止条件，这部分本应是最后写的，可以跳过之后再看
+	    if(arr.length<2){
+		return false;
+		return arr;
+	    }
+
+	    //定义一个基准值，理论上可以是数组中的任意值，但为了形象，取中间index的；
+	    let midIndex = Math.floor(arr.length/2);
+	    let midNum = arr[midIndex];
+
+	    //定义两个数组，分别存放小于基准值及大于基准值的项
+	    let leftAarr = [] ;
+	    let rightArr = [] ;
+
+	    //遍历数组，进行排序
+	    for(var i = 0 ;i<arr.length ; i++){
+		if(arr[i]<midNum){
+		    leftAarr.push(arr[i])
+		}else if(arr[i]>midNum){
+		    rightAarr.push(arr[i])
+		}
+	    }
+
+	    //递归
+	    return quickSort(leftAarr).concat(midNum,quickSort(rightArr));//写到此处要在函数中判断停止条件
+
+	}
