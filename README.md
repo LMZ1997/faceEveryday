@@ -438,7 +438,7 @@
 	var result=$.extend(obj1,{name:"Jerry",sex:"Boy"})
  	result=={name:"Jerry",age:21,sex:"Boy"}
 	obj1=={name:"Jerry",age:21,sex:"Boy"}
-# 快速排序
+# 算法之快速排序（贼简单）
 	let quickSort = (arr)=>{
 
 	    //停止条件，这部分本应是最后写的，可以跳过之后再看
