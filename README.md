@@ -469,3 +469,17 @@
 
 	}
 # js是单线程的，为什么？ 只知道一方面是避免DOM渲染的冲突。如何解决？引入了同步异步概念
+# 异步的实现方式有哪些喃？
+	ES6之前：callback、eventloop、Promise
+	
+	ES6：Generator   ：
+	
+		function* gen(x){
+		  var y = yield x + 2;
+		  return y;
+		}
+		var g = gen(1);
+		g.next() // { value: 3, done: false }
+		g.next() // { value: undefined, done: true }
+		
+	ES7:Async/Await
