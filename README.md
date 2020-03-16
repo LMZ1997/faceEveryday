@@ -473,7 +473,7 @@
 	ES6之前：callback、eventloop、Promise
 	
 	ES6：Generator   ：
-	
+		示例：
 		function* gen(x){
 		  var y = yield x + 2;
 		  return y;
@@ -481,5 +481,6 @@
 		var g = gen(1);
 		g.next() // { value: 3, done: false }
 		g.next() // { value: undefined, done: true }
+		g.next(2) // { value: 2, done: true }  传的参数直接赋值给了y
 		
 	ES7:Async/Await
