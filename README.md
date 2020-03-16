@@ -468,3 +468,4 @@
 	    return quickSort(leftAarr).concat(midNum,quickSort(rightArr));//写到此处要在函数中判断停止条件
 
 	}
+# js是单线程的，为什么？ 只知道一方面是避免DOM渲染的冲突。如何解决？引入了同步异步概念
