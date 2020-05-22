@@ -490,3 +490,16 @@
 	ES7:Async/Await
 # 函数柯里化是什么
      把接收多个参数的函数变换为接收一个参数的函数，并且返回新函数的技术（这个新函数满足接收其余参数并且返回结果）
+# 两个巨大的正整数相加
+	function sum(st1,st2){
+	    let a = st1.trim().split('');
+	    let b = st2.trim().split('');
+	    let middle = 0;
+	    let res ='';
+	    while(a.length||b.length){
+		middle+= ~~a.pop()+ ~~b.pop()
+		res=(middle%10)+res
+		middle= middle>9;
+	    }
+	    return res;
+	}
